@@ -209,9 +209,11 @@ class GlobalSetting
         c[:port] = redis_port if redis_port
 
         if get_redis_replica_host && get_redis_replica_port && defined?(RailsFailover)
-          c[:replica_host] = get_redis_replica_host
-          c[:replica_port] = get_redis_replica_port
-          c[:connector] = RailsFailover::Redis::Connector
+          c[:client_implementation] = RailsFailover::Redis::Client
+          c[:custom] = {
+            replica_host: get_redis_replica_host,
+            replica_port: get_redis_replica_port,
+          }
         end
 
         c[:password] = redis_password if redis_password.present?
@@ -233,9 +235,11 @@ class GlobalSetting
         c[:port] = message_bus_redis_port if message_bus_redis_port
 
         if get_message_bus_redis_replica_host && get_message_bus_redis_replica_port
-          c[:replica_host] = get_message_bus_redis_replica_host
-          c[:replica_port] = get_message_bus_redis_replica_port
-          c[:connector] = RailsFailover::Redis::Connector
+          c[:client_implementation] = RailsFailover::Redis::Client
+          c[:custom] = {
+            replica_host: get_message_bus_redis_replica_host,
+            replica_port: get_message_bus_redis_replica_port,
+          }
         end
 
         c[:password] = message_bus_redis_password if message_bus_redis_password.present?
