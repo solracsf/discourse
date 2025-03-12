@@ -50,7 +50,7 @@ class RateLimiter
     @type = type
     @key = build_key(type)
     @max = max
-    @secs = secs
+    @secs = secs.to_i
     @global = global
     @aggressive = aggressive
     @error_code = error_code
