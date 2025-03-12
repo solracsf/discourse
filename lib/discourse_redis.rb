@@ -214,7 +214,7 @@ class DiscourseRedis
   end
 
   def reconnect
-    @redis._client.reconnect
+    @redis.close
   end
 
   def namespace_key(key)
